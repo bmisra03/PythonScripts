@@ -3,15 +3,19 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.expected_conditions import presence_of_element_located
+
 import time
 
 PATH = "C:\Program Files (x86)\chromedriver.exe"
+
 driver = webdriver.Chrome(PATH)
-
-driver.get("https://nth-solutions.com/")
-
-element = driver.find_element_by_id("menu-item-290")
-element.click()
+with webdriver.Chrome() as driver:
+    wait = WebDriverWait(driver, 10)
+    driver.get("https://www.google.com/")
+    driver.find_element(By.NAME, "q").send_keys("cheese" + Keys.RETURN)
+    first_result = wait.until(presence_of_element_located((By.CSS_SELECTOR, "h3>div")))
+    print(first_result.get_attribute("textContent"))
 
 
 
