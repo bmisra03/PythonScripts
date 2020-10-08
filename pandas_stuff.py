@@ -4,6 +4,7 @@ import numpy as np
 
 
 planets = sns.load_dataset('planets')
+print(planets.describe())
 
 rng = np.random.RandomState(42)
 df = pd.DataFrame({'A':rng.rand(5),
